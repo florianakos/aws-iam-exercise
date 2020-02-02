@@ -3,11 +3,12 @@ from botocore.exceptions import ClientError
 
 
 def handler(event, context):
+
     sts_client = boto3.client('sts')
     print(f"\n === Checking IAM Identity ===\nARN: {sts_client.get_caller_identity()['Arn']}\n")
     s3_client = boto3.client('s3')
 
-    print("=== Checking Read access to S3 file ===")
+    print("=== Testing Read access to S3 file in bucket ===")
     try:
         print(s3_client.get_object(Bucket='flrnks-secure-bucket',
                                    Key='metrics.json')["Body"] \
@@ -16,7 +17,7 @@ def handler(event, context):
     except ClientError as e:
         print(f"Error: {e.response['Error']['Code']}!")
 
-    print("=== Checking Write access to S3 file ===")
+    print("=== Testing Write access to S3 bucket ===")
     try:
         s3_client.put_object(Body=b'{ "data":"json" }',
                              Bucket='flrnks-secure-bucket',
@@ -34,14 +35,14 @@ def handler(event, context):
                             aws_session_token=response['Credentials']['SessionToken'])
 
     new_sts_client = session.client('sts')
-    print(f"\n=== Assuming New IAM Identity ===\nARN: {new_sts_client.get_caller_identity()['Arn']}\n")
+    print(f"\n=== Assumed New IAM Identity ===\nARN: {new_sts_client.get_caller_identity()['Arn']}\n")
 
-    print("=== Checking Write access to S3 bucket ===")
+    print("=== Testing Write access to S3 bucket (using new role) ===")
     try:
         s3_client = session.client('s3')
         s3_client.put_object(Body=b'{ "data":"json" }',
                              Bucket='flrnks-secure-bucket',
                              Key='upload.json')
-        [print("... with success!\n")]
+        print("... file was written successfully!\n")
     except ClientError as e:
         print(f"Error: {e.response['Error']['Code']}!")

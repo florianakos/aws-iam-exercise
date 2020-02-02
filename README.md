@@ -13,22 +13,22 @@ This will save into the response.json file the return value of your AWS Lambda f
 In order to inspect its standard output, we can use CloudWatch Log Groups, which will show something like this:
 
 ```
- === Checking IAM Identity ===
-ARN: arn:aws:sts::??????????:assumed-role/Base-Lambda-Custom-Role/lambda
+=== Checking IAM Identity ===
+ARN: arn:aws:sts::XXXXXXXXXXX:assumed-role/Base-Lambda-Custom-Role/lambda
 
-=== Checking Read access to S3 file ===
+=== Testing Read access to S3 file in bucket ===
 {
-	"blablabla": true
-	"xyz": 52679913
+	"yesno": true,
+	"foo": 52679913,
+	"bar": 1374451518
 }
 
-=== Checking Write access to S3 file ===
+=== Testing Write access to S3 bucket ===
 Error: AccessDenied!
 
-=== Assuming New IAM Identity ===
-ARN: arn:aws:sts::??????????:assumed-role/S3-RW-Role/lambda
+=== Assumed New IAM Identity ===
+ARN: arn:aws:sts::XXXXXXXXXXXX:assumed-role/S3-RW-Role/lambda
 
-=== Checking Write access to S3 bucket ===
-... with success!
-
+=== Testing Write access to S3 bucket (using new role) ===
+... file was written successfully!
 ```
