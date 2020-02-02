@@ -4,20 +4,19 @@ Simple project which I used to practice AWS IAM concepts using Python / Boto3. U
 
 ```
  === Checking IAM Identity ===
-ARN: arn:aws:sts::546454927816:assumed-role/Base-Lambda-Custom-Role/lambda
+ARN: arn:aws:sts::??????????:assumed-role/Base-Lambda-Custom-Role/lambda
 
 === Checking Read access to S3 file ===
 {
-	"job_success": true,
-	"ipsCount": 52679913,
-	"hostsCount": 1374451518
+	"blablabla": true
+	"xyz": 52679913
 }
 
 === Checking Write access to S3 file ===
 Error: AccessDenied!
 
 === Assuming New IAM Identity ===
-ARN: arn:aws:sts::546454927816:assumed-role/S3-RW-Role/lambda
+ARN: arn:aws:sts::??????????:assumed-role/S3-RW-Role/lambda
 
 === Checking Write access to S3 bucket ===
 ... with success!
