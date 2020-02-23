@@ -17,3 +17,5 @@ variable lambda_func_path {
   type = string
   default = "../src/lambda.zip"
 }
+
+data "aws_caller_identity" "current" {}

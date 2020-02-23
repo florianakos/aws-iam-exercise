@@ -54,6 +54,10 @@ data "aws_iam_policy_document" "s3_rw_assume_allow" {
       type = "AWS"
       identifiers = [ aws_iam_role.aws_custom_role_for_lambda.arn, ]
     }
+    principals {
+      identifiers = [ "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/flrnks", ]
+      type = "AWS"
+    }
   }
 }
 

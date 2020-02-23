@@ -5,6 +5,10 @@ data "aws_iam_policy_document" "lambda_allow_asume_policy" {
       type = "Service"
       identifiers = [ "lambda.amazonaws.com", ]
     }
+    principals {
+      identifiers = [ "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/flrnks", ]
+      type = "AWS"
+    }
   }
 }
 
